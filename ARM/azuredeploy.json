@@ -1,0 +1,63 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "AppServicePlanName": {
+           "type": "string",
+           "metadata": {
+                "description": "The name of your ASP."
+            }
+        },
+        "AppServicePlanSize": {
+            "type": "string",
+            "metadata": {
+                 "description": "The size of your ASP."
+             }
+         },
+         "WebSiteName": {
+            "type": "string",
+            "metadata": {
+                 "description": "The WebSite Name Prefix"
+             }
+         }
+    },
+    "variables": {
+        "WebSiteNameFull": "[concat(parameters('WebSiteName'), '-', uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2014-06-01",
+            "name": "[parameters('AppServicePlanName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "[parameters('AppServicePlanSize')]",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "[parameters('AppServicePlanName')]"
+            },
+            "properties": {
+                "name": "[parameters('AppServicePlanName')]"
+            }
+        },
+        {
+            "apiVersion": "2015-08-01",
+            "name": "[variables('WebSiteNameFull')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('AppServicePlanName'))]": "Resource",
+                "displayName": "[variables('WebSiteNameFull')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms/', parameters('AppServicePlanName'))]"
+            ],
+            "properties": {
+                "name": "[variables('WebSiteNameFull')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('AppServicePlanName'))]"
+            }
+        }
+    ],
+    "outputs": {}
+}
