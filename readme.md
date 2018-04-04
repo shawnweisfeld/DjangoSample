@@ -3,6 +3,7 @@
 ## General Information Links
 Config Python
 https://docs.microsoft.com/en-us/azure/app-service/web-sites-python-configure
+https://aka.ms/PythonOnAppService
 
 Simple Python Apps
 https://github.com/Azure-Samples/python-docs-hello-world
@@ -52,3 +53,7 @@ requirements.txt just pulling in django
 runtime.txt forcing Azure to 3.4
 
 web.config default web.config from the Azure docs, except I did tweak the App Settings area to work with django. 
+
+
+D:\Python34\python.exe -m pip install --upgrade -r d:\home\site\wwwroot\requirements.txt
+
