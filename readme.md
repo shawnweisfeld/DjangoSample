@@ -21,3 +21,9 @@ In the project you will see 3 folders: ARM, docs and src.
         - **appSettings** Here we need to setup some key/values so that our site works correctly, NOTE the "WSGI_LOG" setting, this enables debugging, you will want to remove this in production.
         - **handlers** Here we tell IIS to use the version of python that we will install via the web site extension
     - We also have a folder **mysite** that is home to our django app 
+
+## Setting up the build
+1. Create a new build, pointing at your source code with an **Empty process** template
+1. Add an Azure Deployment step to your build, and point it at your Azure Subscription and the ARM template and Parameters file from source control.
+1. Add an Azure App Service Deploy step to your build, this should copy all the code from the src folder into the web site that we created in the last step. 
+1. Add an Azure PowerShell step to your build, this should run the postdeploy.ps1 file from the ARM folder. This PowerShell script, takes 2 arguments "resourceGroupName" and "webAppname". This script will log into Kudu to have it run pip install against the requirements.txt file to ensure that you have all the proper python dependencies.
