@@ -2,17 +2,16 @@
 
 ## General Informational Links
 Config Python
-https://docs.microsoft.com/en-us/azure/app-service/web-sites-python-configure
-https://aka.ms/PythonOnAppService
+ - https://docs.microsoft.com/en-us/azure/app-service/web-sites-python-configure
+ - https://aka.ms/PythonOnAppService
 
 Simple Python Apps
-https://github.com/Azure-Samples/python-docs-hello-world
-https://github.com/Azure-Samples/app-service-web-python-get-started
+ - https://github.com/Azure-Samples/python-docs-hello-world
+ - https://github.com/Azure-Samples/app-service-web-python-get-started
 
 ## Project Structure
 In the project you will see 3 folders: ARM, docs and src. 
   - The **ARM** folder contains the ARM templates to deploy the App Service Plan and Azure Website (with the Python extension installed)
-  - The **Docs** folder contains images for this readme
   - The **src** folder contains our source code
     - In the root of the source folder you will see a few important files
       - **ptvs_virtualenv_proxy.py** This file contains some boiler plate setup code, copy it as-is into your project
@@ -24,6 +23,8 @@ In the project you will see 3 folders: ARM, docs and src.
 
 ## Setting up the build
 1. Create a new build, pointing at your source code with an **Empty process** template
-1. Add an Azure Deployment step to your build, and point it at your Azure Subscription and the ARM template and Parameters file from source control.
-1. Add an Azure App Service Deploy step to your build, this should copy all the code from the src folder into the web site that we created in the last step. 
-1. Add an Azure PowerShell step to your build, this should run the postdeploy.ps1 file from the ARM folder. This PowerShell script, takes 2 arguments "resourceGroupName" and "webAppname". This script will log into Kudu to have it run pip install against the requirements.txt file to ensure that you have all the proper python dependencies.
+1. Add an **Azure Deployment** step to your build, and point it at your Azure Subscription and the ARM template and Parameters file from source control.
+1. Add an **Azure App Service Deploy** step to your build, this should copy all the code from the src folder into the web site that we created in the last step. 
+1. Add an **Azure PowerShell** step to your build, this should run the postdeploy.ps1 file from the ARM folder. This PowerShell script, takes 2 arguments "resourceGroupName" and "webAppname". This script will log into Kudu to have it run pip install against the requirements.txt file to ensure that you have all the proper python dependencies.
+
+> NOTE: this is about the simplest Django app and build/release pipeline, the goal is to show off the process. In the real world the build/release pipeline can be much more complex. 
