@@ -10,8 +10,8 @@ Simple Python Apps
  - https://github.com/Azure-Samples/app-service-web-python-get-started
 
 ## Project Structure
-In the project you will see 3 folders: ARM, docs and src. 
-  - The **ARM** folder contains the ARM templates to deploy the App Service Plan and Azure Website (with the Python extension installed)
+In the project you will see the following folders:
+  - The **ARM** folder contains the ARM templates to deploy the App Service Plan and Azure Website (with the Python extension installed), it also contains a post deployment powershell script
   - The **src** folder contains our source code
     - In the root of the source folder you will see a few important files
       - **ptvs_virtualenv_proxy.py** This file contains some boiler plate setup code, copy it as-is into your project
