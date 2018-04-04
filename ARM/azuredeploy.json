@@ -60,13 +60,13 @@
         },
         {
             "apiVersion": "2015-08-01",
-            "name": "python361x64",
+            "name": "python364x64",
             "type": "siteextensions",
             "properties": { },
             "dependsOn": [
               "[resourceId('Microsoft.Web/sites', variables('WebSiteNameFull'))]"
             ]
-          }   
+        }
     ],
     "outputs": {}
 }
