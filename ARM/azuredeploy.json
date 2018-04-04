@@ -32,7 +32,7 @@
             "location": "[resourceGroup().location]",
             "sku": {
                 "name": "[parameters('AppServicePlanSize')]",
-                "capacity": 1
+                "capacity": 0
             },
             "tags": {
                 "displayName": "[parameters('AppServicePlanName')]"
@@ -56,17 +56,20 @@
             "properties": {
                 "name": "[variables('WebSiteNameFull')]",
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('AppServicePlanName'))]"
-            }
-        },
-        {
-            "apiVersion": "2015-08-01",
-            "name": "python364x64",
-            "type": "siteextensions",
-            "properties": { },
-            "dependsOn": [
-              "[resourceId('Microsoft.Web/sites', variables('WebSiteNameFull'))]"
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "python364x64",
+                    "type": "siteextensions",
+                    "properties": { },
+                    "dependsOn": [
+                      "[resourceId('Microsoft.Web/sites', variables('WebSiteNameFull'))]"
+                    ]
+                }
             ]
         }
+        
     ],
     "outputs": {}
 }
