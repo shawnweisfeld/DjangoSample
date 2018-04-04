@@ -27,6 +27,9 @@ Clean Up
 az group delete -n djangoRG -y --no-wait 
 ```
 
+python.exe -m pip install --upgrade -r d:\home\site\wwwroot\requirements.txt
+
+
 ## Hints/Tweaks
 Having trouble with Python? Add the following App Settings value (in the portal, so you can turn it off without a redeploy) to output a debug file you can review to get hints about what is wrong. 
 Key: WSGI_LOG
