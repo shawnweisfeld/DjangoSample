@@ -14,10 +14,10 @@ In the project you will see the following folders:
   - The **ARM** folder contains the ARM templates to deploy the App Service Plan and Azure Website (with the Python extension installed), it also contains a post deployment powershell script
   - The **src** folder contains our source code
     - In the root of the source folder you will see a few important files
-      - **ptvs_virtualenv_proxy.py** This file contains some boiler plate setup code, copy it as-is into your project
       - **requirements.txt** This file lists any python dependencies that you have, for us it is only django
       - **web.config** In here you see two important sections
-        - **appSettings** Here we need to setup some key/values so that our site works correctly, NOTE the "WSGI_LOG" setting, this enables debugging, you will want to remove this in production.
+        - **appSettings** Here we need to setup some key/values so that our site works correctly
+          > NOTE the "WSGI_LOG" setting, this enables debugging, you will want to remove this in production.
         - **handlers** Here we tell IIS to use the version of python that we will install via the web site extension
     - We also have a folder **mysite** that is home to our django app 
 
