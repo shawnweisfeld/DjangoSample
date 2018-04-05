@@ -22,7 +22,8 @@
          }
     },
     "variables": {
-        "WebSiteNameFull": "[concat(parameters('WebSiteName'), '-', uniqueString(resourceGroup().id))]"
+        "WebSiteNameFull": "[concat(parameters('WebSiteName'), '-', uniqueString(resourceGroup().id))]",
+        "AppInsightsNameFull": "[concat(parameters('WebSiteName'), 'AI-', uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {
@@ -75,10 +76,37 @@
                     "dependsOn": [
                       "[resourceId('Microsoft.Web/sites', variables('WebSiteNameFull'))]"
                     ]
-                }
+                },
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "appsettings",
+                    "type": "config",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/sites', variables('WebSiteNameFull'))]",
+                        "[resourceId('Microsoft.Insights/components', variables('AppInsightsNameFull'))]"
+                    ],
+                    "properties": {
+                      "applicationInsightsInstrumentationKey": "[reference(resourceId('Microsoft.Insights/components', variables('AppInsightsNameFull')), '2014-04-01').InstrumentationKey]"
+                    }
+                  }          
             ]
+        },
+        {
+          "apiVersion": "2014-04-01",
+          "name": "[variables('AppInsightsNameFull')]",
+          "type": "Microsoft.Insights/components",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', variables('WebSiteNameFull'))]"
+          ],
+          "tags": {
+            "[concat('hidden-link:', resourceId('Microsoft.Web/sites', variables('WebSiteNameFull')))]": "Resource",
+            "displayName": "[variables('AppInsightsNameFull')]"
+          },
+          "properties": {
+            "ApplicationId": "[variables('AppInsightsNameFull')]"
+          }
         }
-        
     ],
     "outputs": {}
 }
