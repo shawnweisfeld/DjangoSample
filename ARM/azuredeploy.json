@@ -86,7 +86,7 @@
                         "[resourceId('Microsoft.Insights/components', variables('AppInsightsNameFull'))]"
                     ],
                     "properties": {
-                      "applicationInsightsInstrumentationKey": "[reference(resourceId('Microsoft.Insights/components', variables('AppInsightsNameFull')), '2014-04-01').InstrumentationKey]"
+                      "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', variables('AppInsightsNameFull')), '2014-04-01').InstrumentationKey]"
                     }
                   }          
             ]
